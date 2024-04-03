@@ -1,6 +1,6 @@
-#################################################
-Laser Tracker Alignment System at Vera C. Rubin Observatory
-#################################################
+###############################
+Laser Tracker Alignment System
+###############################
 
 .. abstract::
 
@@ -48,7 +48,6 @@ In addition to routine alignments, specific procedures are in place to ensure
 comprehensive system readiness and operational integrity:
 
 - **BLOCK-246**: Tests that all targets are measurable by the laser tracker.
-
 - **BLOCK-197**: Tests the sequential misalignment and realignment of all optical elements, 
 testing and confirming the system's capability to accurately realign after intentional displacement.
 
