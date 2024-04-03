@@ -47,7 +47,9 @@ Special Procedures
 In addition to routine alignments, specific procedures are in place to ensure 
 comprehensive system readiness and operational integrity:
 
-- **BLOCK-246**: Tests that all targets are measurable by the laser tracker.
+- **BLOCK-246**: Tests that all targets are measurable by the laser tracker. 
+It goes through all the targets and ensures no errors are found when measuring them.
+
 - **BLOCK-197**: Tests the sequential misalignment and realignment of all optical elements, 
 testing and confirming the system's capability to accurately realign after intentional displacement.
 
