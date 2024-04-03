@@ -36,6 +36,7 @@ of specialized scripts designed to facilitate the alignment process:
 
 - ``maintel/lasertracker/measure.py``: This script measures a target 
 and calculates the offset of that target (either M2 or Camera) with respect to M1M3.
+
 - ``maintel/lasertracker/align.py``: With inputs for a target and a tolerance level, 
 this script measures the chosen target and iteratively realigns the telescope using the 
 measured offsets until the specified tolerance is achieved.
@@ -47,6 +48,7 @@ In addition to routine alignments, specific procedures are in place to ensure
 comprehensive system readiness and operational integrity:
 
 - **BLOCK-246**: Tests that all targets are measurable by the laser tracker.
+
 - **BLOCK-197**: Tests the sequential misalignment and realignment of all optical elements, 
 testing and confirming the system's capability to accurately realign after intentional displacement.
 
