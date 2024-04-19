@@ -57,7 +57,7 @@ This adjustment allows us to correct for any real displacements without the inte
 assumed distances between M1M3 and the target. It ensures that the default distance between 
 M1M3 and the target is not erroneously generating displacement artifacts.
 
-.. image:: /Users/gmegias/Desktop/LSST_Developer/technotes/sitcomtn-122/_static/drawing.png
+.. image:: /_static/drawing.png
    :align: center
 
 
