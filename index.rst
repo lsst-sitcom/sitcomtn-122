@@ -60,6 +60,36 @@ M1M3 and the target is not erroneously generating displacement artifacts.
 .. image:: /_static/drawing.png
    :align: center
 
+Currently we execute measurements with this commands:
+
+.. code-block:: python
+   
+   await self.model.measure_target("M1M3")
+   await self.model.measure_target(target)
+
+   target_frame_name = self.get_target_name(target)
+   reference_frame_name = self.get_target_name("M1M3")
+
+   target_offset = await self.model.get_target_offset(
+      target=target_frame_name, reference_pointgroup=reference_frame_name
+   )
+
+We propose to change the method to the following:
+
+.. code-block:: python
+
+   await self.model.measure_target("M1M3")
+   await self.model.measure_target(target)
+
+   target_frame_name = self.get_target_name(target)
+   reference_frame_name = self.get_default_target_name(target)
+
+   target_offset = await self.model.get_target_offset(
+      target=target_frame_name, reference_pointgroup=reference_frame_name
+   )
+
+Note that this also involves changing the default Z coordinate of `FrameCAM` and `FrameM2` to their nominal
+Z position with respect to M1M3.
 
 Regular Operations
 ==================
