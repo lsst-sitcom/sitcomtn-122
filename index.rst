@@ -25,7 +25,41 @@ The T2SA software on its turn interfaces with Spatial Analyzer, the proprietary 
 by the laser tracker's manufacturer. Remote desktop access to the laser tracker computer is 
 available for operational control and monitoring, with access details provided within the 
 "lasetracker" Slack channel. This setup ensures a seamless operational 
-flow and allows for efficient management and troubleshooting of the system.
+flow and allows for efficient management and troubleshooting of the system.  
+
+Computing Target offsets
+========================
+
+In our previous approach to computing offsets on M2 and the Camera, we employed a 
+method where we would measure the target (we will choose "Camera" for this explanation) points and update the reference `FrameCAM`
+by creating the `Frame_CAM_meas`. Notably, `FrameCAM` was centered at the origin of M1M3. 
+Due to this configuration, `Frame_CAM_meas` was also centered at the origin of M1M3, leading to 
+observed displacements in the frame caused by rotation in the hexapod, since the hexapod point of rotation is 
+at the Camera instead of at that origin. These rotational displacements
+were artifacts that would not have been apparent if FrameCAM had been centered directly at 
+the center of the CAM target. 
+
+Indeed, take the example of 0.15deg rotation about x in the hexapod. This rotation would cause the
+FrameCAM at the center of M1M3 to move, 
+
+.. math::
+   
+   dY = \sin(0.15^\circ) \times \text{{distance between M1M3 and Camera}} \approx 0.15^\circ \times 4.06\,m \approx 10\,mm.
+
+To avoid these artifacts, we need to adopt a new method. 
+This method is detailed in one of the initial schmeatic drawings the vendor made, as seen below.
+Initially, we measure M1M3 and establish this measurement as the base or working 
+frame by setting the tracker at the center of M1M3. All subsequent measurements are 
+then made with respect to this M1M3 frame. Then, we proceed to measure M2 and the camera. 
+The measurement frame for M2 (`Frame_M2_meas`) is compared to the default `FrameM2`, 
+but crucially, this time the frame is centered at the actual location of the M2 target center. 
+This adjustment allows us to correct for any real displacements without the interference of 
+assumed distances between M1M3 and the target. It ensures that the default distance between 
+M1M3 and the target is not erroneously generating displacement artifacts.
+
+.. image:: /Users/gmegias/Desktop/LSST_Developer/technotes/sitcomtn-122/_static/drawing.png
+   :align: center
+
 
 Regular Operations
 ==================
