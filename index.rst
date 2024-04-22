@@ -46,6 +46,11 @@ FrameCAM at the center of M1M3 to move,
    
    dY = \sin(0.15^\circ) \times \text{{distance between M1M3 and Camera}} \approx 0.15^\circ \times 4.06\,m \approx 10\,mm.
 
+In the following figure, we can observe the artifcats seen when moving the hexapod in dRY. 
+
+.. image:: /_static/measured_offsets.png
+   :align: center
+
 To avoid these artifacts, we need to adopt a new method. 
 This method is detailed in one of the initial schmeatic drawings the vendor made, as seen below.
 Initially, we measure M1M3 and establish this measurement as the base or working 
@@ -63,7 +68,7 @@ M1M3 and the target is not erroneously generating displacement artifacts.
 Currently we execute measurements with this commands:
 
 .. code-block:: python
-   
+
    await self.model.measure_target("M1M3")
    await self.model.measure_target(target)
 
@@ -90,6 +95,14 @@ We propose to change the method to the following:
 
 Note that this also involves changing the default Z coordinate of `FrameCAM` and `FrameM2` to their nominal
 Z position with respect to M1M3.
+
+It is important to understand that the new method is doing two things:
+
+1. When measuring the target M1M3, it is setting the reference frame to the center of M1M3. 
+   This means any measurements after will be in that frame of reference. 
+2. We measure the offset between the default target offset, which is the optical optimal 
+   position of the target w.r.t. to M1M3, and the measured target offset. 
+   This is the actual offset of the target w.r.t. to perfect optical alignment.
 
 Regular Operations
 ==================
